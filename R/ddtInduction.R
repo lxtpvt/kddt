@@ -258,7 +258,7 @@ kddtInduction <- function(nids, type, X, y, fitedModel, predMethod, samplingPara
                                                   samplingParameters, nSim, ncores = ncores)
 
   subTrees <- inductionPredictionTree(X, interpretableTree, fitedModel, predMethod, samplingParameters, rpart.cp)
-  #imp <- importance.ddt(y, X, interpretableTree, subTrees)
+
   return(list(interpretableTree = interpretableTree, predictiveSubTrees = subTrees, data=list(X=X,y=y)))
 }
 
