@@ -4,7 +4,7 @@
 #' @param tree a rpart object is the fitted tree.
 #' @param type a strings in the vector of c("classification","regression","survival").
 #'
-#' @return a list includes the variable importance of the interpretable part of ddt.
+#' @return a list includes the variable importance of the interpretable part of kddt.
 #' @export
 #'
 importance.interpretable <- function(X, y, tree, type)
@@ -81,36 +81,36 @@ importance.interpretable <- function(X, y, tree, type)
 
 # Fit a large number of stumps
 #' Insert the child tree's rpart.object$frame into its parent tree's rpart.object$frame.
-#' @param ddt a rpart object is the fitted tree.
+#' @param kddt a rpart object is the fitted tree.
 #' @param type a strings in the vector of c("classification","regression","survival").
 #'
-#' @return a list includes the variable importance of the ddt.
+#' @return a list includes the variable importance of the kddt.
 #' @export
 #'
-importance.ddt <- function(ddt, type){
+importance.kddt <- function(kddt, type){
 
   if(!(type %in% c("classification","regression","survival"))){
     return("Please select 'type' in the set (classification, regression, survival)")
   }
 
-  X = ddt$data$X
-  y = ddt$data$y
-  interpretableTree=ddt$interpretableTree
+  X = kddt$data$X
+  y = kddt$data$y
+  interpretableTree=kddt$interpretableTree
   treeInfo = treeInfo(interpretableTree)
-  predictiveSubTrees=ddt$predictiveSubTrees
+  predictiveSubTrees=kddt$predictiveSubTrees
 
   if(type == "survival"){
     if(length(system.file(package='survival'))==0){
       return("The package 'survival' is needed.")
     }
-    y = ddt$interpretableTree$survival.y
+    y = kddt$interpretableTree$survival.y
   }
 
-  # the prediction of the entire ddt
+  # the prediction of the entire kddt
   if(type %in% c("regression","survival")){
-    y.ddt <- ddtPredict(ddt, X, "vector")
+    y.kddt <- kddtPredict(kddt, X, "vector")
   }else{
-    y.ddt <- ddtPredict(ddt, X, "class")
+    y.kddt <- kddtPredict(kddt, X, "class")
   }
 
   imp.interpretableTree = importance.interpretable(X, y, interpretableTree, type)
@@ -131,7 +131,7 @@ importance.ddt <- function(ddt, type){
     if(length(temp.oids)>0){
       actual <- y[temp.oids]
       interpretable.predict <- interpretableTree$frame[which(treeInfo$nid==nid),"yval"]
-      predictive.predict <- y.ddt[temp.oids]
+      predictive.predict <- y.kddt[temp.oids]
 
       inpurity.delta = 0
       if(type %in% c("regression","survival")){ # if split variable is numeric
