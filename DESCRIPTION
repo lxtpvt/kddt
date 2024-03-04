@@ -1,0 +1,40 @@
+Package: kddt
+Type: Package
+Title: Knowledge Distillation Decision Tree
+Version: 0.1.0
+Date: 2021-12-07
+Author: Xuetao Lu
+Maintainer: Xuetao Lu <lxtpvt@gmail.com>
+Description: Knowledge distillation decision tree for interpreting black-box machine learning models.
+Depends: R (>= 2.15.0)
+Imports: rpart
+Suggests:
+    rpart.plot,
+    testthat (>= 3.0.0)
+License: GPL-2 | GPL-3
+Roxygen: list(markdown = TRUE)
+Encoding: UTF-8
+LazyData: true
+Config/testthat/edition: 3
+RoxygenNote: 7.2.3
+Collate: 
+    'assertions.R'
+    'criterions.R'
+    'ddtInduction.R'
+    'importance.R'
+    'meta.R'
+    'print.R'
+    'new_p.R'
+    'new_d.R'
+    'new_q.R'
+    'new_r.R'
+    'plotStability.R'
+    'region.R'
+    'samplingRegion.R'
+    'samplingStrategies.R'
+    'treeFunctions.R'
+    'treeStability.R'
+    'utilities.R'
+    'utils-new.R'
+    'utils.R'
+    'x_tbl.R'
